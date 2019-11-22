@@ -1,4 +1,5 @@
 using JG.FinTechTest.API.Extensions;
+using JG.FinTechTest.Shared.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +12,7 @@ namespace JG.FinTechTest.API
     {
         #region Properties
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; private set; }
 
         #endregion
 
@@ -28,10 +29,12 @@ namespace JG.FinTechTest.API
         /// Called by the runtime to Add System Services to the container
         /// </summary>
         /// <param
-        public static void ConfigureServices(IServiceCollection services)
+        public  void ConfigureServices(IServiceCollection services)
         {
             services.AddSystemServices();
             services.AddControllers();
+
+            services.Configure<GiftAidSetup>(Configuration.GetSection("GiftAidSetup"));
         }
 
         /// <summary>
