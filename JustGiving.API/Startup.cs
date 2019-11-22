@@ -1,11 +1,11 @@
-using JustGiving.API.Extensions;
+using JG.FinTechTest.API.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace JustGiving.API
+namespace JG.FinTechTest.API
 {
     public class Startup
     {

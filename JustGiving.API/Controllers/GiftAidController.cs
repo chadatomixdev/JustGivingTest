@@ -1,7 +1,7 @@
-﻿using JustGiving.API.Helpers;
+﻿using JG.FinTechTest.API.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JustGiving.API.Controllers
+namespace JG.FinTechTest.API.Controllers
 {
     [ApiController]
     [Route("api/giftaid")]

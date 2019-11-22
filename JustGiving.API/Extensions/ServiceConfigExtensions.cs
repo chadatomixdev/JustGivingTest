@@ -2,7 +2,7 @@
 using Microsoft.OpenApi.Models;
 using System;
 
-namespace JustGiving.API.Extensions
+namespace JG.FinTechTest.API.Extensions
 {
     public static class ServiceConfigExtensions
     {

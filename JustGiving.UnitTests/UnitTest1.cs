@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace JustGiving.UnitTests
+namespace JG.FinTechTest.UnitTests
 {
     public class UnitTest1
     {

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace JustGiving.API
+namespace JG.FinTechTest.API
 {
     public static class Program
     {

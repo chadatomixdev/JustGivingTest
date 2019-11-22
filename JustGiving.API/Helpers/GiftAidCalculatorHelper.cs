@@ -1,4 +1,4 @@
-﻿namespace JustGiving.API.Helpers
+﻿namespace JG.FinTechTest.API.Helpers
 {
     public class GiftAidCalculatorHelper
     {
