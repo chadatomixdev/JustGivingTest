@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JustGiving.API", "JustGivin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustGiving.UnitTests", "JustGiving.UnitTests\JustGiving.UnitTests.csproj", "{67D7B0B3-FC8B-413C-A570-88367B945ABD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustGiving.Shared", "JustGiving.Shared\JustGiving.Shared.csproj", "{87668902-C135-4FFF-A5A6-ED4FDAED85E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustGiving.Data", "JustGiving.Data\JustGiving.Data.csproj", "{D05649E3-1108-4D84-968F-64D99D908188}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{67D7B0B3-FC8B-413C-A570-88367B945ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67D7B0B3-FC8B-413C-A570-88367B945ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67D7B0B3-FC8B-413C-A570-88367B945ABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87668902-C135-4FFF-A5A6-ED4FDAED85E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87668902-C135-4FFF-A5A6-ED4FDAED85E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87668902-C135-4FFF-A5A6-ED4FDAED85E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87668902-C135-4FFF-A5A6-ED4FDAED85E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D05649E3-1108-4D84-968F-64D99D908188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D05649E3-1108-4D84-968F-64D99D908188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D05649E3-1108-4D84-968F-64D99D908188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D05649E3-1108-4D84-968F-64D99D908188}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
