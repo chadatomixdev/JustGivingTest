@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 namespace JG.FinTechTest.API.Controllers
 {
     [ApiController]
-    [Route("api/giftaid")]
+    [Route("api/")]
     public class GiftAidController : Controller
     {
         private readonly GiftAidSetup _giftAidOptions;
@@ -19,21 +19,20 @@ namespace JG.FinTechTest.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Test()
+        [Route("giftaid")]
+        public IActionResult GetGiftAid(decimal amount)
         {
-           return Ok("Hello World");
-        }
 
-        [HttpGet]
-        public IActionResult giftaid(double amount)
-        {
+            //[FromBody]GiftAidRequest giftAid
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             GiftAidSetup();
 
-            var value = _giftAidService.Calculate(3);
+            var value = _giftAidService.Calculate(amount);
 
             return Ok(value);
-
-            return Ok();
         }
 
         /// <summary>
