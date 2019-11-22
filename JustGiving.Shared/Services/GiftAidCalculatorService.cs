@@ -1,6 +1,5 @@
 ﻿using JG.FinTechTest.Shared.Interfaces;
 using JG.FinTechTest.Shared.Models;
-using System;
 
 namespace JG.FinTechTest.Shared.Services
 {
@@ -9,26 +8,18 @@ namespace JG.FinTechTest.Shared.Services
 
         #region Constructor
 
-        GiftAidSetup _giftAidSetup { get; set; }
-
-        public GiftAidCalculatorService()
-        {
-           // _giftAidSetup = new GiftAidSetup();
-        }
+        GiftAidSetup GiftAidSetup { get; set; }
 
         #endregion
 
         public void ConfigureGiftAidService(GiftAidSetup setup)
         {
-            _giftAidSetup = setup;
+            GiftAidSetup = setup;
         }
-
 
         public decimal Calculate(decimal donationAmount)
         {
-            return donationAmount * (_giftAidSetup.TaxRate / (100 - _giftAidSetup.TaxRate));
+            return donationAmount * (GiftAidSetup.TaxRate / (100 - GiftAidSetup.TaxRate));
         }
-
-
     }
 }

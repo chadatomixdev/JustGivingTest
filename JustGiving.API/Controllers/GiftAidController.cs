@@ -9,8 +9,14 @@ namespace JG.FinTechTest.API.Controllers
     [Route("api/")]
     public class GiftAidController : Controller
     {
+        #region Properties
+
         private readonly GiftAidSetup _giftAidOptions;
         private readonly IGiftAidCalculator _giftAidService;
+
+        #endregion
+
+        #region Constructor
 
         public GiftAidController(IOptions<GiftAidSetup> giftAidOptions, IGiftAidCalculator giftAidService)
         {
@@ -18,29 +24,47 @@ namespace JG.FinTechTest.API.Controllers
             _giftAidService = giftAidService;
         }
 
+        #endregion
+
+        /// <summary>
+        /// Get the amount of gift aid reclaimable for donation amount
+        /// </summary>
+        /// <param name="giftAidRequest"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("giftaid")]
-        public IActionResult GetGiftAid(decimal amount)
+        public IActionResult GetGiftAid([FromQuery]GiftAidRequest giftAidRequest)
         {
-
-            //[FromBody]GiftAidRequest giftAid
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if (giftAidRequest is null)
+                return BadRequest("Invalid donation");
+
+            //Setup GiftAid object basec on saved configuration and calculate the GiftAiud value
             GiftAidSetup();
 
-            var value = _giftAidService.Calculate(amount);
+            var calculatedGiftAidAmount = _giftAidService.Calculate(giftAidRequest.Amount);
 
-            return Ok(value);
+            var giftAidResponse = new GiftAidResponse
+            {
+                DonationAmount = giftAidRequest.Amount,
+                GiftAidAmount = calculatedGiftAidAmount
+            };
+
+            return Ok(giftAidResponse);
         }
 
+        #region Private Methods
+
         /// <summary>
-        /// Configure the GiftAid setup object with the configurable GiftAid settings
+        /// Configure the GiftAid setup object with the configurable GiftAid settings from appsettings.json file
         /// </summary>
         private void GiftAidSetup()
         {
             _giftAidService.ConfigureGiftAidService(_giftAidOptions);
         }
+
+        #endregion
     }
 }
