@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using JG.FinTechTest.Shared.Interfaces;
+using JG.FinTechTest.Shared.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
 
@@ -23,6 +25,8 @@ namespace JG.FinTechTest.API.Extensions
                     },
                 });
             });
+
+            services.AddScoped<IGiftAidCalculator, GiftAidCalculatorService>();
 
             return services;
         }

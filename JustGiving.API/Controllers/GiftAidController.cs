@@ -1,5 +1,4 @@
-﻿using System;
-using JG.FinTechTest.API.Helpers;
+﻿using JG.FinTechTest.Shared.Interfaces;
 using JG.FinTechTest.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -11,33 +10,38 @@ namespace JG.FinTechTest.API.Controllers
     public class GiftAidController : Controller
     {
         private readonly GiftAidSetup _giftAidOptions;
+        private readonly IGiftAidCalculator _giftAidService;
 
-        public GiftAidController(IOptions<GiftAidSetup> giftAidOptions)
+        public GiftAidController(IOptions<GiftAidSetup> giftAidOptions, IGiftAidCalculator giftAidService)
         {
             _giftAidOptions = giftAidOptions.Value;
+            _giftAidService = giftAidService;
         }
 
         [HttpGet]
         public IActionResult Test()
         {
-
-
-            //TODO this is temporary, refacor 
-            var giftAid = new GiftAidCalculatorHelper().Calculate(3);
-
-            GiftAidSetup();
-
-
-            return Ok("Hello World");
+           return Ok("Hello World");
         }
 
+        [HttpGet]
+        public IActionResult giftaid(double amount)
+        {
+            GiftAidSetup();
+
+            var value = _giftAidService.Calculate(3);
+
+            return Ok(value);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Configure the GiftAid setup object with the configurable GiftAid settings
+        /// </summary>
         private void GiftAidSetup()
         {
-            //GiftAid is setup to be configurable using the appsettings file. 
-            //Retrieve the GifAid setup object
-
-            var tr =_giftAidOptions.TaxRate;
-            
+            _giftAidService.ConfigureGiftAidService(_giftAidOptions);
         }
     }
 }

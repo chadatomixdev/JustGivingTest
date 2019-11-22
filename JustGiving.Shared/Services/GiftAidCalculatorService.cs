@@ -4,28 +4,31 @@ using System;
 
 namespace JG.FinTechTest.Shared.Services
 {
-    public class IGiftAidCalculatorService : IGiftAidCalculator
+    public class GiftAidCalculatorService : IGiftAidCalculator
     {
 
         #region Constructor
 
         GiftAidSetup _giftAidSetup { get; set; }
 
-        public IGiftAidCalculatorService()
+        public GiftAidCalculatorService()
         {
-            _giftAidSetup = new GiftAidSetup();
+           // _giftAidSetup = new GiftAidSetup();
         }
 
         #endregion
 
-        public void ConfigureGiftAidService(decimal taxRate, decimal minDonation, decimal maxDonation)
+        public void ConfigureGiftAidService(GiftAidSetup setup)
         {
-            throw new NotImplementedException();
+            _giftAidSetup = setup;
         }
+
 
         public decimal Calculate(decimal donationAmount)
         {
-            throw new NotImplementedException();
+            return donationAmount * (_giftAidSetup.TaxRate / (100 - _giftAidSetup.TaxRate));
         }
+
+
     }
 }
