@@ -1,4 +1,4 @@
-﻿using JG.FinTechTest.Shared.Models;
+﻿using JG.FinTechTest.Data.Entities;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 

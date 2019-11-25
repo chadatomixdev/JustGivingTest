@@ -1,4 +1,6 @@
 ﻿using JG.FinTechTest.Data;
+using JG.FinTechTest.Data.Repository;
+using JG.FinTechTest.Data.Services;
 using JG.FinTechTest.Shared.Interfaces;
 using JG.FinTechTest.Shared.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +29,10 @@ namespace JG.FinTechTest.API.Extensions
                 });
             });
 
-            services.AddScoped<IGiftAidCalculator, GiftAidCalculatorService>();
+            services.AddScoped<EFRepository>();
+            services.AddScoped<RepositoryService>();
+            services.AddScoped<IGiftAidService, GiftAidCalculatorService>();
+            services.AddScoped<IDonationService, DonationService>();
             services.AddEntityFrameworkSqlite().AddDbContext<JGDBContext>();
 
             return services;

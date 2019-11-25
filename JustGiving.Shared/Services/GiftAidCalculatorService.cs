@@ -3,7 +3,7 @@ using JG.FinTechTest.Shared.Models;
 
 namespace JG.FinTechTest.Shared.Services
 {
-    public class GiftAidCalculatorService : IGiftAidCalculator
+    public class GiftAidCalculatorService : IGiftAidService
     {
 
         #region Constructor

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace JG.FinTechTest.Shared.Models
+namespace JG.FinTechTest.Data.Entities
 {
     public class Donation
     {
         [Key]
-        Guid DeclarationID { get; set; }
+        public Guid DeclarationID { get; set; }
         public string Name { get; set; }
         public string PostCode { get; set; }
         public decimal DonationAmount { get; set; }

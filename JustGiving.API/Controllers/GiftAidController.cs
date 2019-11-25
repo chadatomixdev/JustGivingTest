@@ -3,6 +3,8 @@ using JG.FinTechTest.Shared.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Swashbuckle.Swagger.Annotations;
+using System.Net;
 
 namespace JG.FinTechTest.API.Controllers
 {
@@ -13,16 +15,21 @@ namespace JG.FinTechTest.API.Controllers
         #region Properties
 
         private readonly GiftAidSetup _giftAidOptions;
-        private readonly IGiftAidCalculator _giftAidService;
+        private readonly IGiftAidService _giftAidService;
+        private readonly IDonationService _donationService;
 
         #endregion
 
         #region Constructor
 
-        public GiftAidController(IOptions<GiftAidSetup> giftAidOptions, IGiftAidCalculator giftAidService)
+        public GiftAidController(IOptions<GiftAidSetup> giftAidOptions, IGiftAidService giftAidService, IDonationService donationService)
         {
             _giftAidOptions = giftAidOptions.Value;
             _giftAidService = giftAidService;
+            _donationService = donationService;
+
+            //Setup GiftAid object based on the saved configuration values
+            GiftAidSetup();
         }
 
         #endregion
@@ -36,16 +43,13 @@ namespace JG.FinTechTest.API.Controllers
         [Route("giftaid")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetGiftAid([FromQuery]GiftAidRequest giftAidRequest)
+        public ActionResult GetGiftAid([FromQuery]GiftAidRequest giftAidRequest)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             if (giftAidRequest is null)
                 return BadRequest("Invalid donation");
-
-            //Setup GiftAid object based on saved configuration and calculate the GiftAid value
-            GiftAidSetup();
 
             var calculatedGiftAidAmount = _giftAidService.Calculate(giftAidRequest.Amount);
 
@@ -58,16 +62,28 @@ namespace JG.FinTechTest.API.Controllers
             return Ok(giftAidResponse);
         }
 
+        /// <summary>
+        /// Store the donors inforation in the database and return the unique identifier and gift aid
+        /// </summary>
+        /// <param name="donationRequest"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("donate")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult PostDonation([FromQuery]DonationRequest donationRequest)
+        [SwaggerResponse(HttpStatusCode.Created, Type = typeof(DonationResponse))]
+        public ActionResult<DonationResponse> PostDonation([FromQuery]DonationRequest donationRequest)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok();
+            var calculatedGiftAidAmount = _giftAidService.Calculate(donationRequest.Amount);
+            var response = _donationService.ReturnDonationResponse(donationRequest, calculatedGiftAidAmount);
+
+            if (response is null)
+                return BadRequest();
+
+            return Ok(response);
         }
 
         #region Private Methods
