@@ -3,8 +3,6 @@ using JG.FinTechTest.Shared.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Swashbuckle.Swagger.Annotations;
-using System.Net;
 
 namespace JG.FinTechTest.API.Controllers
 {
@@ -71,7 +69,6 @@ namespace JG.FinTechTest.API.Controllers
         [Route("donate")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [SwaggerResponse(HttpStatusCode.Created, Type = typeof(DonationResponse))]
         public ActionResult<DonationResponse> PostDonation([FromQuery]DonationRequest donationRequest)
         {
             if (!ModelState.IsValid)
