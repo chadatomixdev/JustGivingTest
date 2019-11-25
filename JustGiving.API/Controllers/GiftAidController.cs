@@ -41,7 +41,7 @@ namespace JG.FinTechTest.API.Controllers
             if (giftAidRequest is null)
                 return BadRequest("Invalid donation");
 
-            //Setup GiftAid object basec on saved configuration and calculate the GiftAiud value
+            //Setup GiftAid object based on saved configuration and calculate the GiftAid value
             GiftAidSetup();
 
             var calculatedGiftAidAmount = _giftAidService.Calculate(giftAidRequest.Amount);
