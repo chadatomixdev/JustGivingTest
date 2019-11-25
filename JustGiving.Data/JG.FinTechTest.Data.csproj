@@ -19,5 +19,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="2.2.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JustGiving.Shared\JG.FinTechTest.Shared.csproj" />
+  </ItemGroup>
   
 </Project>

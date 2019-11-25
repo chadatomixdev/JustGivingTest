@@ -1,5 +1,6 @@
 ﻿using JG.FinTechTest.Shared.Interfaces;
 using JG.FinTechTest.Shared.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -33,6 +34,8 @@ namespace JG.FinTechTest.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("giftaid")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetGiftAid([FromQuery]GiftAidRequest giftAidRequest)
         {
             if (!ModelState.IsValid)
@@ -53,6 +56,18 @@ namespace JG.FinTechTest.API.Controllers
             };
 
             return Ok(giftAidResponse);
+        }
+
+        [HttpGet]
+        [Route("donate")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult PostDonation([FromQuery]DonationRequest donationRequest)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok();
         }
 
         #region Private Methods

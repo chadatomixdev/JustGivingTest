@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace JG.FinTechTest.Shared.Models
 {
     public class Donation
     {
+        [Key]
         Guid DeclarationID { get; set; }
         public string Name { get; set; }
         public string PostCode { get; set; }

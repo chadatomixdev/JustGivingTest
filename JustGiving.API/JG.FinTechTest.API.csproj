@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JustGiving.Data\JG.FinTechTest.Data.csproj" />
     <ProjectReference Include="..\JustGiving.Shared\JG.FinTechTest.Shared.csproj" />
   </ItemGroup>
   

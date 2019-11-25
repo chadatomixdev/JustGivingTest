@@ -1,4 +1,5 @@
-﻿using JG.FinTechTest.Shared.Interfaces;
+﻿using JG.FinTechTest.Data;
+using JG.FinTechTest.Shared.Interfaces;
 using JG.FinTechTest.Shared.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -27,6 +28,7 @@ namespace JG.FinTechTest.API.Extensions
             });
 
             services.AddScoped<IGiftAidCalculator, GiftAidCalculatorService>();
+            services.AddEntityFrameworkSqlite().AddDbContext<JGDBContext>();
 
             return services;
         }
