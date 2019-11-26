@@ -2,23 +2,33 @@
 using JG.FinTechTest.Shared.Interfaces;
 using JG.FinTechTest.Shared.Models;
 using JG.FinTechTest.Shared.Services;
+using JG.FinTechTest.UnitTests.Config;
 using JG.FinTechTest.UnitTests.Fakes;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Xunit;
 
 namespace JG.FinTechTest.UnitTests
 {
-    public class GiftAidControllerUnitTests
+    public class GiftAidControllerUnitTests : IClassFixture<Setup>
     {
+        #region Properties
+        private readonly IOptions<GiftAidSetup> _giftAidOptions;
         private readonly IGiftAidService _giftAidService;
         private readonly IDonationService _donationService;
         private readonly GiftAidController _giftAidController;
+        readonly ServiceProvider _serviceProvider;
 
-        public GiftAidControllerUnitTests()
+        #endregion
+
+        public GiftAidControllerUnitTests(Setup setup)
         {
+            _serviceProvider = setup.ServiceProvider;
             _giftAidService = new GiftAidCalculatorService();
             _donationService = new DonationServiceFake();
-            //_giftAidController = new GiftAidController()
+            _giftAidOptions = _serviceProvider.GetRequiredService<IOptions<GiftAidSetup>>();
+            _giftAidController = new GiftAidController(_giftAidOptions, _giftAidService, _donationService);
         }
 
         [Fact]
