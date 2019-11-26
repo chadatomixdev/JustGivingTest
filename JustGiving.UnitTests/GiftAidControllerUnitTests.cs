@@ -14,6 +14,7 @@ namespace JG.FinTechTest.UnitTests
     public class GiftAidControllerUnitTests : IClassFixture<Setup>
     {
         #region Properties
+     
         private readonly IOptions<GiftAidSetup> _giftAidOptions;
         private readonly IGiftAidService _giftAidService;
         private readonly IDonationService _donationService;
@@ -43,5 +44,35 @@ namespace JG.FinTechTest.UnitTests
             // Assert
             Assert.IsType<OkObjectResult>(createdResponse);
         }
+
+        [Fact]
+        public void GetGiftAidValidRequestReturnsValidResponse()
+        {
+            // Arrange
+            var request = new GiftAidRequest { Amount = 500 };
+
+            // Act
+            var createdResponse = _giftAidController.GetGiftAid(request) as OkObjectResult;
+
+            // Assert
+            Assert.IsType<GiftAidResponse>(createdResponse.Value);
+        }
+
+        //[Fact]
+        //public void GetGiftAidInvalidAmounttReturnsBadRequest()
+        //{
+        //    // Arrange
+        //    var request = new GiftAidRequest { Amount = 1 };
+
+        //    // Act
+        //    var createdResponse = _giftAidController.GetGiftAid(request);
+
+        //    var a = _giftAidController.TryValidateModel(request);
+
+        //    // Assert
+        //    Assert.IsType<BadRequestObjectResult>(request);
+        //}
+
+
     }
 }

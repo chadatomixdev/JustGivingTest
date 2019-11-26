@@ -69,7 +69,7 @@ namespace JG.FinTechTest.API.Controllers
         [Route("donate")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<DonationResponse> PostDonation([FromQuery]DonationRequest donationRequest)
+        public ActionResult PostDonation([FromQuery]DonationRequest donationRequest)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
