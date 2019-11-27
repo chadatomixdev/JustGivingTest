@@ -1,5 +1,27 @@
 # JustGiving Test
 
+
+## Dev Summary
+
+The solution is written in .NetCore 3 with the shared code using .NetStandard 2. The data store is a SQLlite DB using Entity Framework.
+Swagger is the API Client used to document the API and is exposed when running the API to provide support in testing the API.
+XUnit is the testing framework used for Unit Tests.
+
+### API Endpoints 
+
+  * GiftAid - /api/giftaid
+  * Donation - /api/donate
+  * Test - /api/test
+
+### Improvements to be made:
+
+  * The unit tests are basic and need to be improved 
+  * Add API Application Metrics 
+  * Add docker containerization support
+  * Add application logging
+
+## Instructions
+
 A big part of what we do at JustGiving is reclaim the Gift Aid on donations made to charities. This saves them a lot of time and processing overheads.
 
 The calculation for gift aid is `[Donation Amount] * ( [TaxRate] / (100 - [TaxRate]) )`.
@@ -9,11 +31,11 @@ The calculation for gift aid is `[Donation Amount] * ( [TaxRate] / (100 - [TaxRa
   * Please create a public repo (GitHub, BitBucket, GitLab etc) and send us the link, make sure to commit regularly so we can see how you came up with the solution.
   * Remember to be RESTful.
 
-## Story 1 - Gift Aid Calculator
+### Story 1 - Gift Aid Calculator
 * Create a calculator.
 * Gift aid calculated at a tax rate of 20%.
 
-## Story 2 - Endpoint
+### Story 2 - Endpoint
 
 * Create an endpoint so that other services can access the calculation for Gift Aid.
 * Use this swagger spec as the basis for your API
@@ -54,14 +76,14 @@ definitions:
         type: number
 ```
 
-## Story 3 - Validation
+### Story 3 - Validation
 * There are two validation rules: 
     * Minimum donation amount is £2.00.
     * Maximum donation amount is £100,000.00. 
 * Add validation for these cases and any other validation / error handling you think is appropriate for this endpoint.
 * Add appropriate tests and document the endpoint
 
-## Story 4 - Storing Gift Aid Declarations
+### Story 4 - Storing Gift Aid Declarations
 
 * When a user makes a donation with Gift Aid, we need to store information about the donor.
 * We need to store: 
