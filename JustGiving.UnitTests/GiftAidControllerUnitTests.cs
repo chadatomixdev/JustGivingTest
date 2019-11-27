@@ -33,7 +33,7 @@ namespace JG.FinTechTest.UnitTests
         }
 
         [Fact]
-        public void GetGiftAidShouldReturnOkResult()
+        public void GetGiftAidReturnsOkResult()
         {
             // Arrange
             var request = new GiftAidRequest { Amount = 300 };
@@ -58,6 +58,24 @@ namespace JG.FinTechTest.UnitTests
             Assert.IsType<GiftAidResponse>(createdResponse.Value);
         }
 
+        [Theory]
+        [InlineData(150, 37.5)]
+        [InlineData(300, 75.00)]
+        [InlineData(2000, 500.00)]
+        public void GetGiftAidReturnCorrectGiftAid(decimal donationAmount, decimal expectedValue)
+        {
+            // Arrange
+            var request = new GiftAidRequest { Amount = donationAmount };
+
+            // Act
+            var result = _giftAidController.GetGiftAid(request) as OkObjectResult;
+
+            var response = (GiftAidResponse)result.Value;            
+
+            // Assert
+            Assert.Equal(response.GiftAidAmount, expectedValue);
+        }
+
         //[Fact]
         //public void GetGiftAidInvalidAmounttReturnsBadRequest()
         //{
@@ -73,6 +91,18 @@ namespace JG.FinTechTest.UnitTests
         //    Assert.IsType<BadRequestObjectResult>(request);
         //}
 
+        [Fact]
+        public void PostDonationReturnsOkResult()
+        {
+            // Arrange
+            var request = new DonationRequest { Amount = 150, Name = "Test", PostCode = "GA1" };
+
+            // Act
+            var createdResponse = _giftAidController.PostDonation(request);
+
+            // Assert
+            Assert.IsType<OkObjectResult>(createdResponse);
+        }
 
     }
 }
